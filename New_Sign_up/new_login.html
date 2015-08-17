@@ -1,0 +1,49 @@
+
+<html>
+<head>
+    <style type="text/css">
+        .wrapper{
+            position:relative;
+            min-height:100%;
+            
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="banner">
+        <form action="?" method="post" name="login">
+            <p align="center">Fields Marked with (<font color="red">*</font>) are compulsory.</p>
+            <h1></h1>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
+
+<?php
+$username=isset($_POST['username'])?$_POST['username']:"";
+$pass=isset($_POST['password'])?$_POST['password']:"";
+$note="";
+    if(isset($_POST['signin']))
+    {
+	$conn = mysql_connect("localhost","root","");
+	mysql_select_db("student_record",$conn);
+	$query =mysql_query( "select username,password from record where username= '$username' and password='$pass'");
+	$row=mysql_fetch_array($query);
+	if(!empty($row['username']) AND !empty($row['password']))
+	{
+        $note="<h4>LOGIN SUCCESSFULL!!! </h4>";
+		echo $note;
+
+	}
+	else
+	{	
+        $note="<h4>Login Failed !!!! </h4>";
+		echo $note;
+	}
+    }
+?>
+
