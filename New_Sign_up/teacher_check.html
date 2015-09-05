@@ -1,0 +1,101 @@
+<html>
+<head>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<style type="text/css">
+body{
+    background-image: url(plain2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+    .login{
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        color:green;
+    }
+    .card
+    {
+        width: auto;
+        height: auto;
+    }
+    .form
+    {
+        background-color: #fff;
+        border-radius: 5px;
+        margin: 0 auto 25px;
+        width: 600px;
+        text-align: center;
+        padding: 20px 20px 30px;
+        box-shadow: 1px 1px 10px black;
+    }
+    fieldset { 
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 1em;
+    padding-bottom: 5em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    font-family: inherit;
+}
+    select{
+        font-family: cursive;
+        font-weight: bold;
+    }
+    a{
+        margin: 2px 50px;
+    }
+</style>
+</head>
+<body>
+<form role="form" action="subject_selected.php" method="post">
+<div class="container">
+    <pre class="login">Login Succesfull !!!! </h1></pre>
+        <div class="form-group form">
+        <div class="card">
+            <fieldset>
+                <legend>
+                    <strong><label for="theory">Select Your Theory Subject:</label></strong>
+                </legend>
+                    <select class="form-control" id="theory" name="theory">
+                    <option selected disabled>Select from the list</option>
+                    <option>Theory Of Computation</option>
+                    <option>Database Management System And Administration</option>
+                    <option>Data Communication And Wireless Sensors Networks</option>
+                    <option>Computer Forensic And Cyber Applications</option>
+                    <option>Operating System And Design</option>
+                    </select>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <strong>
+                        <label for="practical">Select Your Practical Subjects:</label>
+                    </strong>
+                </legend>
+                <select class="form-control" id="practical" name="practical">
+                    <option selected disabled>Select from the list</option>
+                    <option>ESDL</option>
+                    <option>Programming Lab 1</option>
+                    <option>Programming Lab 2</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <strong>
+                        <label for="division">Select Your Division: <small>(Hold <kbd>shift</kbd> to select multiple)</small></label>
+                    </strong>
+                </legend>
+                <select multiple class="form-control" id="division" name="division">
+                <option>Division A</option>
+                <option>Division B</option>
+                <option>Division C</option>
+                </select>
+            </fieldset>
+            <a href="new_login1.php" class="btn btn-success btn-lg">SUBMIT</a>
+            <a href="new_login1.php" class="btn btn-danger btn-lg">CANCEL</a>
+        </div>
+        </div>
+</div>
+</form>
+</body>
+</html>
