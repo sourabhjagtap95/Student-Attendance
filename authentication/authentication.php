@@ -8,8 +8,7 @@ define(HOST, 'localhost');
 function attemptLogin($username, $password)
     {
           
-        $model           = new Model;
-        $stmt            = $model->dbconnect->prepare('SELECT * FROM users WHERE username = :username');
+        $stmt            = 'SELECT * FROM users WHERE username = :username';
         $stmt->execute(array('username' => $username));
         $row             = $stmt->fetch(PDO::FETCH_ASSOC);
         $model           = null;
@@ -28,9 +27,9 @@ function attemptLogin($username, $password)
             return 0;
         }
     }
-    
 
-function checkLogin()
+
+function checkLogin(bool $value)
     {   
         if (isset($_SESSION['id'], $_SESSION['username'], $_SESSION['login_string'])) {
             $username        = $_SESSION['username'];

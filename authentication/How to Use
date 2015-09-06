@@ -1,0 +1,42 @@
+To use on any page 
+
+1. copy authentication.php to your directory
+
+2. just add a line at the top every page that requires it.
+	
+	require_once('authentication.php');
+
+3. to start session use (this will start the seesion required for checking if user is logged in or logged out):
+
+	startSession();
+
+	note: it should be started on each page for proper usage of other functions
+
+4. To login use:
+
+	attemptLogin($username, $password);
+
+	pass in the username and password recieved from the user to the function
+
+	the function return false if authentication failed ( invalid password or username )
+
+	it will return true for successfull login
+
+
+	Practical usage:
+
+		if(attemptLogin($_POST['username'],$_POST['password'])
+		{
+			//forward to the required page
+		} else {
+			//forward to required page shoing the error
+		}
+
+5. to logout use:
+
+	destroySession();
+
+
+6. to check if the user is logged in use (incomplete):
+
+	checkLogin();
