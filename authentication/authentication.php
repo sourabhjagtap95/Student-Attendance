@@ -88,3 +88,37 @@ function startSession()
             session_regenerate_id(true);
         }
     }
+
+
+ function dbconnect()
+ {
+	$conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+
+	return $conn;
+} 
+
+function dbclose(mysqli $conn)
+{
+	$conn->close();
+}
+
+
+ }
+
+ function dbconnectPDO()
+ {
+ 	try {
+    		$conn = new PDO("mysql:host=$servername;dbname=myDB", USERNAME, PASSWORD);    
+    		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e) {
+    		die("Connection failed: " . $e->getMessage());
+    }
+ }
+
+ function dbclosePDO(PDO $conn)
+ {
+ 	$conn = null;
+ }

@@ -10,7 +10,7 @@ To use on any page
 
 	startSession();
 
-	note: it should be started on each page for proper usage of other functions
+	note: it should be started on each page for proper usage of other functions to work
 
 4. To login use:
 
