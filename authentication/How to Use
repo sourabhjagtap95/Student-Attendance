@@ -42,3 +42,5 @@ To use on any page
 6. to check if the user is logged in use (incomplete):
 
 	checkLogin();
+
+	it will return true if user logged in else it will return false

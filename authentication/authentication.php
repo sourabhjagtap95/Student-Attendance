@@ -2,18 +2,21 @@
 
 define(USERNAME, 'root');
 define(PASSWORD, 'toor');
-define(DATABASE, 'attendence');
+define(DATABASE, 'atttendance');
 define(HOST, 'localhost');
 
 function attemptLogin($username, $password)
     {
           
-        $stmt            = 'SELECT * FROM users WHERE username = :username';
-        $stmt->execute(array('username' => $username));
-        $row             = $stmt->fetch(PDO::FETCH_ASSOC);
-        $model           = null;
-        if ($stmt->rowCount() == 1) {
-                if (Encryption::verify($row["password"],$password)) {
+        $conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
+        $sql = "SELECT * FROM users WHERE username = '$username'";
+        
+        $result = $conn->query($sql);
+
+        if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                $conn->close();
+                if ($row["password"]==md5($password)) {
                     $_user_browser            = $_SERVER['HTTP_USER_AGENT'];
                     $_SESSION['id']      = $row["id"];
                     $_SESSION['username']     = $username;
@@ -29,16 +32,16 @@ function attemptLogin($username, $password)
     }
 
 
-function checkLogin(bool $value)
+function checkLogin()
     {   
         if (isset($_SESSION['id'], $_SESSION['username'], $_SESSION['login_string'])) {
             $username        = $_SESSION['username'];
-            $model           = new Model;
-            $stmt            = $model->dbconnect->prepare('SELECT * FROM users WHERE username = :username');
-            $stmt->execute(array('username' => $username));
-            $row             = $stmt->fetch(PDO::FETCH_ASSOC);
-            $model= null;
-            if ($stmt->rowCount() == 1) {
+            $conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
+            $sql = "SELECT * FROM users WHERE username = '$username'";
+            $result = $conn->query($sql);
+            if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                $conn->close();
                 $passwordhash    = $row["password"];
                 $user_browser   = $_SERVER['HTTP_USER_AGENT'];
                 if ($_SESSION['login_string'] == hash('sha512', $passwordhash.$user_browser)&&$_SESSION['id']==$row['id']) {
@@ -88,37 +91,3 @@ function startSession()
             session_regenerate_id(true);
         }
     }
-
-
- function dbconnect()
- {
-	$conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-
-	return $conn;
-} 
-
-function dbclose(mysqli $conn)
-{
-	$conn->close();
-}
-
-
- }
-
- function dbconnectPDO()
- {
- 	try {
-    		$conn = new PDO("mysql:host=$servername;dbname=myDB", USERNAME, PASSWORD);    
-    		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-    		die("Connection failed: " . $e->getMessage());
-    }
- }
-
- function dbclosePDO(PDO $conn)
- {
- 	$conn = null;
- }
